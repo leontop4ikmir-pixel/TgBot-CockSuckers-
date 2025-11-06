@@ -67,5 +67,8 @@ def get_users_count():
     conn.close()
     return count
 
-# Создаем БД при импорте этого файла
 create_database()
+
+
+
+#сделал изменения СУКА БЛЯЯЯЯТЬ
