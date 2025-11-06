@@ -4,26 +4,12 @@ from config import BOT_TOKEN
 import datetime
 import sqlite3  
 import os    
+from database import create_database, add_user,get_user,get_all_users,get_users_count
+
+
 bot = telebot.TeleBot(BOT_TOKEN)
 print("стартовый запуск есть, гнида!")
 
-
-def create_simple_db():
-    conn = sqlite3.connect('simple_users.db')
-    cursor = conn.cursor()
-    
-    # Всего ОДНА таблица с минимальными полями
-    cursor.execute('''
-        CREATE TABLE IF NOT EXISTS users (
-            user_id INTEGER PRIMARY KEY,
-            username TEXT,
-            first_name TEXT,
-            join_date TEXT
-        )
-    ''')
-    
-    conn.commit()
-    conn.close()
 
 @bot.message_handler(commands=["help"])
 def say_poshel_naxui(message):
@@ -77,9 +63,6 @@ def handle_inline_buttons(call):
     elif call.data == "attention":
         bot.answer_callback_query(call.id, "ЭТА КНОПКА В РАЗРАБОТКЕ", show_alert=True)
         
-
-
-
 
 @bot.message_handler(commands=['start'])
 def say_hello(message):
